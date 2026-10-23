@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}{{ topic }} | Study Materials{% endblock %}
+{% block content %}
+<section class="card">
+  <span class="tag">{{ skill }}</span>
+  <h1>{{ topic }}</h1>
+  <h2>Study Notes</h2>
+  <p>{{ material.explanation }}</p>
+  <h2>Example</h2>
+  <pre>{{ material.example }}</pre>
+  <h2>Practice Exercises</h2>
+  <ol>{% for exercise in material.exercises %}<li>{{ exercise }}</li>{% endfor %}</ol>
+  <h2>Additional Resources</h2>
+  <ul>{% for link in external_links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.name }}</a></li>{% endfor %}</ul>
+  <a class="button secondary" href="{{ url_for('learning_plan') }}">Back to Learning Plan</a>
+</section>
+{% endblock %}

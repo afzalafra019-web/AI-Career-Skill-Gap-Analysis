@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Personalized Learning Plan{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Your Personalized Learning Plan</h1>
+  <p class="muted">Complete each topic, open its study material, and mark your progress.</p>
+  <p><strong>{{ completed_topics }}</strong> of <strong>{{ total_topics }}</strong> topics completed ({{ progress_percentage }}%).</p>
+  <div class="progress-track"><div class="progress-fill" style="width: {{ progress_percentage }}%"></div></div>
+</section>
+{% if learning_plan %}
+  {% for item in learning_plan %}
+  <section class="card">
+    <span class="tag">{{ item.skill }}</span>
+    <h3>{{ item.topic }}</h3>
+    <a class="button secondary" href="{{ item.study_url }}">Open Study Material</a>
+    <form method="post" action="{{ url_for('update_progress') }}">
+      <input type="hidden" name="skill" value="{{ item.skill }}">
+      <input type="hidden" name="topic" value="{{ item.topic }}">
+      <label><input type="checkbox" name="completed" value="1" {% if item.completed %}checked{% endif %} onchange="this.form.submit()"> Mark as completed</label>
+    </form>
+  </section>
+  {% endfor %}
+{% else %}
+  <section class="card"><h2>Plan complete or no topics needed</h2><p>There are no topics in the current plan. Check your selected career and skill levels.</p></section>
+{% endif %}
+{% endblock %}

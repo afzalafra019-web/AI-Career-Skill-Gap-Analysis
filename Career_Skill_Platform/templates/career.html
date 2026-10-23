@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Choose Career{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Choose Your Career</h1>
+  <p class="muted">Select the career you want to pursue. The platform will compare its required skills with your profile.</p>
+  <form method="post">
+    {% for c in careers %}
+    <div class="choice">
+      <label><input type="radio" name="career" value="{{ c }}" {% if selected_career == c %}checked{% endif %} required> {{ c }}</label>
+      <p class="muted">
+        {% if c == 'Data Analyst' %}Data, spreadsheets, SQL, Python and visualisation.
+        {% elif c == 'Python Developer' %}Python programming, databases, APIs and Flask.
+        {% elif c == 'Web Developer' %}HTML, CSS, JavaScript and backend basics.
+        {% elif c == 'AI Engineer' %}Python, machine learning, generative AI and APIs.
+        {% else %}LLMs, prompt engineering, APIs and retrieval-augmented generation.{% endif %}
+      </p>
+    </div>
+    {% endfor %}
+    <button type="submit">Analyze My Career Skills</button>
+  </form>
+</section>
+{% endblock %}

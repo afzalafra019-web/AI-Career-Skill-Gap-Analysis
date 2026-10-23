@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Home | Career Skill Platform{% endblock %}
+{% block content %}
+<section class="card">
+  <span class="tag">AI-assisted learning support</span>
+  <h1>Build your skills. Plan your career.</h1>
+  <p class="muted">Identify the skills required for your target career, compare them with your current knowledge, and follow a personalized learning plan.</p>
+  <div class="grid">
+    <div class="card"><h3>1. Student Profile</h3><p>Save your details and current skills.</p></div>
+    <div class="card"><h3>2. Career Selection</h3><p>Choose a target role.</p></div>
+    <div class="card"><h3>3. Skill Gap Analysis</h3><p>See skills to improve.</p></div>
+    <div class="card"><h3>4. Learning Plan</h3><p>Study topics and track progress.</p></div>
+  </div>
+  <a class="button" href="{{ url_for('profile') }}">Get Started</a>
+</section>
+{% endblock %}

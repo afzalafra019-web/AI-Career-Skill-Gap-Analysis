@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Skill Gap Analysis{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Skill Gap Analysis</h1>
+  <p>Your selected career: <strong>{{ career }}</strong></p>
+  <p class="muted">Update your known skills and levels here. Use comma-separated names and levels such as <code>Python: beginner, SQL: intermediate</code>.</p>
+  <form method="post">
+    <label for="known_skills">Skills you know</label>
+    <input id="known_skills" name="known_skills" value="{{ raw_known }}" placeholder="Python, SQL, Excel">
+    <label for="skill_levels">Skill levels</label>
+    <input id="skill_levels" name="skill_levels" value="{{ raw_levels }}" placeholder="Python: beginner, SQL: beginner">
+    <button type="submit">Analyze Skills</button>
+  </form>
+</section>
+{% if analyzed %}
+<section class="card">
+  <h2>Required Skills</h2>
+  <div class="grid">
+  {% for skill, topics in requirements.items() %}
+    <div class="card">
+      <h3>{{ skill }}</h3>
+      <p>Level: <span class="tag">{{ skill_levels.get(skill, 'beginner') }}</span></p>
+      <p class="muted">{{ topics|length }} learning topics</p>
+    </div>
+  {% endfor %}
+  </div>
+  <h2>Skills to Focus On</h2>
+  {% if gap_skills %}
+    <ul>{% for skill in gap_skills %}<li>{{ skill }}</li>{% endfor %}</ul>
+  {% else %}
+    <p>Great! No beginner-level gaps were detected from the information entered.</p>
+  {% endif %}
+  <a class="button" href="{{ url_for('learning_plan') }}">View Personalized Learning Plan</a>
+</section>
+{% endif %}
+{% endblock %}
